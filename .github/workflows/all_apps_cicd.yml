@@ -1,0 +1,9 @@
+on: [workflow_dispatch, push]
+name: all_apps_cicd
+
+jobs:
+  build_and_unittest_linux:
+    runs-on: "ubuntu-latest"
+
+    steps:
+    - uses: actions/checkout@v3
