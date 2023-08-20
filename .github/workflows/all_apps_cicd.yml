@@ -15,11 +15,7 @@ jobs:
       run: dotnet restore
     
     - name: Build all projects
-      uses: Amadevus/pwsh-script@v2.0.1
-      id: dotnet_build
-      with:
-        script: dir "*.csproj" -Recurse | %{dotnet build  $PSItem.FullName}
-    - run: echo '${{ steps.dotnet_build.outputs.result }}'
+      run: dotnet build
 
     - name: Run unit tests
       uses: Amadevus/pwsh-script@v2.0.1
