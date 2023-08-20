@@ -1,0 +1,8 @@
+﻿<rewrite>
+    <rules>
+        <rule name="GetInvoiceWeather">
+            <match url="abccompany/im/1.0/GetInvoiceWeather.fwq"/>
+            <action type="Rewrite" url="invoice/api/forecast"/>
+        </rule>
+    </rules>
+</rewrite>

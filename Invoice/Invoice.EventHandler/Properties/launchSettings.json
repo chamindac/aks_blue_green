@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Invoice.EventHandler": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
