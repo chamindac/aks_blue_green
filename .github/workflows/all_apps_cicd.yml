@@ -18,7 +18,7 @@ jobs:
       uses: Amadevus/pwsh-script@v2.0.1
       id: dotnet-build
       with:
-        script: dir "*.csproj" -Recurse 
+        script: dir "*.csproj" -Recurse | echo
     - run: echo '${{ steps.dotnet-build.outputs.result }}'
     
     
