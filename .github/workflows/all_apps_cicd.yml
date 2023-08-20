@@ -18,7 +18,7 @@ jobs:
       uses: Amadevus/pwsh-script@v2.0.3
       id: dotnet_build
       with:
-        script: dir "*.csproj" -Recurse | %{dotnet build  $PSItem.FullName --no-restore}
+        script: dir "*.csproj" -Recurse | %{dotnet build  $PSItem.FullName}
     - run: echo '${{ steps.dotnet_build.outputs.result }}'
 
     - name: Run unit tests
