@@ -3,7 +3,7 @@ name: all_apps_cicd
 
 jobs:
   build_and_unittest_linux:
-    runs-on: "ubuntu-latest"
+    runs-on: "windows-latest"
 
     steps:
     - uses: actions/checkout@v3
