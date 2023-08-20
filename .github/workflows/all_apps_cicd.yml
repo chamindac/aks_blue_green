@@ -27,7 +27,7 @@ jobs:
     - run: echo '${{ steps.dotnet_test.outputs.result }}'
 
     - name: Create test report
-      uses: dorny/test-reporter@v1.6.0
+      uses: dorny/test-reporter@v1
       if: success() || failure()  # run this step even if previous step failed
       with:
         name: Unit Tests Windows  # Name of the check run which will be created
