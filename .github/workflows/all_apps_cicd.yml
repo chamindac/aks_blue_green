@@ -2,7 +2,7 @@ on: [workflow_dispatch, push]
 name: all_apps_cicd
 
 jobs:
-  build_and_unittest_linux:
+  build_and_unittest_windows:
     runs-on: "windows-latest"
 
     steps:
@@ -14,11 +14,24 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
 
-    - name: Build with dotnet
+    - name: Install dependencies
+      run: dotnet restore
+
+    - name: Run unit tests
       uses: Amadevus/pwsh-script@v2.0.1
-      id: dotnet_build
+      id: dotnet_test
       with:
-        script: dir "*.csproj" -Recurse | %{dotnet build ($PSItem.FullName)}
-    - run: echo '${{ steps.dotnet_build.outputs.result }}'
+        script: |
+                 dir "*.Tests.csproj" -Recurse | %{dotnet test  $PSItem.FullName --logger ("trx;LogFileName=" + ($PSItem.Name -replace ".csproj", ".trx")) /p:CollectCoverage=true /p:CoverletOutputFormat=opencover --no-restore --no-build}
+                 dir "*.Tests.trx" -Recurse | %{ copy-item -Path $PSItem.FullName };
+    - run: echo '${{ steps.dotnet_test.outputs.result }}'
+
+    - name: Test Report
+      uses: dorny/test-reporter@v1.6.0
+      if: success() || failure()  # run this step even if previous step failed
+      with:
+        name: Unit Tests Linux  # Name of the check run which will be created
+        path: ./*.Tests.trx  # Path to test results
+        reporter: dotnet-trx  # Format of test results
     
     
