@@ -10,6 +10,7 @@ jobs:
       checks: write
       
     steps:
+      - uses: actions/checkout@v4
       - name: Build and Unit Test
         id: build_and_unittest
         uses: ./.github/actions/build_and_unittest
@@ -24,6 +25,7 @@ jobs:
       checks: write
       
     steps:
+      - uses: actions/checkout@v4
       - name: Build and Unit Test
         id: build_and_unittest
         uses: ./.github/actions/build_and_unittest
