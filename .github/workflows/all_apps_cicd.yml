@@ -10,33 +10,11 @@ jobs:
       checks: write
       
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '6.0.x'
-    
-    - name: Install dependencies
-      run: dotnet restore
-
-    - name: Build all projects
-      run: dotnet build --no-restore
-
-    - name: Run unit tests
-      uses: Amadevus/pwsh-script@v2.0.3
-      id: dotnet_test
-      with:
-        script: |
-                 dir "*.Tests.csproj" -Recurse | %{dotnet test  $PSItem.FullName --logger ("trx;LogFileName=" + ($PSItem.Name -replace ".csproj", ".trx")) --no-restore --no-build}
-                 dir "*.Tests.trx" -Recurse | %{ copy-item -Path $PSItem.FullName };
-    - run: echo '${{ steps.dotnet_test.outputs.result }}'
-
-    - name: Create test report
-      uses: dorny/test-reporter@v1.6.0
-      if: success() || failure()  # run this step even if previous step failed
-      with:
-        name: Test Results Windows  # Name of the check run which will be created
-        path: ./*.Tests.trx  # Path to test results
-        reporter: dotnet-trx  # Format of test results
+      - name: Build and Unit Test
+        id: build_and_unittest
+        uses: ./.github/actions/build_and_unittest
+        with:
+          build_os: Windows
 
   build_and_unittest_linux:
     runs-on: "ubuntu-latest"
@@ -46,32 +24,8 @@ jobs:
       checks: write
       
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '6.0.x'
-    
-    - name: Install dependencies
-      run: dotnet restore
-
-    - name: Build all projects
-      run: dotnet build --no-restore
-
-    - name: Run unit tests
-      uses: Amadevus/pwsh-script@v2.0.3
-      id: dotnet_test
-      with:
-        script: |
-                 dir "*.Tests.csproj" -Recurse | %{dotnet test  $PSItem.FullName --logger ("trx;LogFileName=" + ($PSItem.Name -replace ".csproj", ".trx")) --no-restore --no-build}
-                 dir "*.Tests.trx" -Recurse | %{ copy-item -Path $PSItem.FullName };
-    - run: echo '${{ steps.dotnet_test.outputs.result }}'
-
-    - name: Create test report
-      uses: dorny/test-reporter@v1.6.0
-      if: success() || failure()  # run this step even if previous step failed
-      with:
-        name: Test Results Linux  # Name of the check run which will be created
-        path: ./*.Tests.trx  # Path to test results
-        reporter: dotnet-trx  # Format of test results
-    
-    
+      - name: Build and Unit Test
+        id: build_and_unittest
+        uses: ./.github/actions/build_and_unittest
+        with:
+          build_os: Linux
