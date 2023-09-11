@@ -5,10 +5,10 @@ name: all_apps_cicd
 jobs:
   build_and_unittest_windows:
     runs-on: "windows-latest"
-    permissions:
-      id-token: write
-      contents: read
-      checks: write
+    # permissions:
+    #   id-token: write
+    #   contents: read
+    #   checks: write
       
     steps:
       - uses: actions/checkout@v4
@@ -20,10 +20,10 @@ jobs:
 
   build_and_unittest_linux:
     runs-on: "ubuntu-latest"
-    permissions:
-      id-token: write
-      contents: read
-      checks: write
+    # permissions:
+    #   id-token: write
+    #   contents: read
+    #   checks: write
       
     steps:
       - uses: actions/checkout@v4

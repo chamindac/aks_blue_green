@@ -3,4 +3,8 @@ name: all_apps_cicd
 
 jobs:
   build_unittest_and_push:
+    permissions:
+      id-token: write
+      contents: read
+      checks: write
     uses: ./.github/workflows/build_unittest_and_push.yml
