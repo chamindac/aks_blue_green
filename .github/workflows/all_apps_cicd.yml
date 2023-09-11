@@ -2,32 +2,9 @@ on: [workflow_dispatch, push]
 name: all_apps_cicd
 
 jobs:
-  build_and_unittest_windows:
-    runs-on: "windows-latest"
+  build_unittest_and_push:
     permissions:
       id-token: write
       contents: read
       checks: write
-      
-    steps:
-      - uses: actions/checkout@v4
-      - name: Build and Unit Test
-        id: build_and_unittest
-        uses: ./.github/actions/build_and_unittest
-        with:
-          build_os: Windows
-
-  build_and_unittest_linux:
-    runs-on: "ubuntu-latest"
-    permissions:
-      id-token: write
-      contents: read
-      checks: write
-      
-    steps:
-      - uses: actions/checkout@v4
-      - name: Build and Unit Test
-        id: build_and_unittest
-        uses: ./.github/actions/build_and_unittest
-        with:
-          build_os: Linux
+    uses: ./.github/workflows/build_unittest_and_push.yml
