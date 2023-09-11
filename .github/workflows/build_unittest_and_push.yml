@@ -1,15 +1,10 @@
 on:
   workflow_call:
-name: all_apps_cicd
+name: build_unittest_and_push
 
 jobs:
   build_and_unittest_windows:
     runs-on: "windows-latest"
-    # permissions:
-    #   id-token: write
-    #   contents: read
-    #   checks: write
-      
     steps:
       - uses: actions/checkout@v4
       - name: Build and Unit Test
@@ -20,11 +15,6 @@ jobs:
 
   build_and_unittest_linux:
     runs-on: "ubuntu-latest"
-    # permissions:
-    #   id-token: write
-    #   contents: read
-    #   checks: write
-      
     steps:
       - uses: actions/checkout@v4
       - name: Build and Unit Test
