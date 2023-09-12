@@ -19,12 +19,12 @@ jobs:
       id-token: write
       contents: read
       checks: write
-    runs-on: "ubuntu-latest"
-    steps:
-      - shell: pwsh
-        run: |
-          echo 'apps from input ${{ inputs.apps }}'
-          echo 'apps from env $apps'
-    # uses: ./.github/workflows/build_unittest_and_push.yml
-    # with:
-    #   apps: ${{ env.apps }}
+    # runs-on: "ubuntu-latest"
+    # steps:
+    #   - shell: pwsh
+    #     run: |
+    #       echo 'apps from input ${{ inputs.apps }}'
+    #       echo 'apps from env $apps'
+    uses: ./.github/workflows/build_unittest_and_push.yml
+    with:
+      apps: $apps
