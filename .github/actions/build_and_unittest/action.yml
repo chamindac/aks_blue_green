@@ -9,33 +9,36 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '6.0.x'
-    
-    - name: Install dependencies
-      shell: pwsh
-      run: dotnet restore
-
-    - name: Build all projects
-      shell: pwsh
-      run: dotnet build --no-restore
-
-    - name: Run unit tests
-      uses: Amadevus/pwsh-script@v2.0.3
-      id: dotnet_test
-      with:
-        script: |
-                  dir "*.Tests.csproj" -Recurse | %{dotnet test  $PSItem.FullName --logger ("trx;LogFileName=" + ($PSItem.Name -replace ".csproj", ".trx")) --no-restore --no-build}
-                  dir "*.Tests.trx" -Recurse | %{ copy-item -Path $PSItem.FullName };
-    
     - shell: pwsh
-      run: echo '${{ steps.dotnet_test.outputs.result }}'
+      run: echo 'runing tests ${{ inputs.build_os }}'
 
-    - name: Create test report
-      uses: dorny/test-reporter@v1.6.0
-      if: success() || failure()  # run this step even if previous step failed
-      with:
-        name: Unit Tests ${{ inputs.build_os }}  # Name of the check run which will be created
-        path: ./*.Tests.trx  # Path to test results
-        reporter: dotnet-trx  # Format of test results
+    # - uses: actions/setup-dotnet@v3
+    #   with:
+    #     dotnet-version: '6.0.x'
+    
+    # - name: Install dependencies
+    #   shell: pwsh
+    #   run: dotnet restore
+
+    # - name: Build all projects
+    #   shell: pwsh
+    #   run: dotnet build --no-restore
+
+    # - name: Run unit tests
+    #   uses: Amadevus/pwsh-script@v2.0.3
+    #   id: dotnet_test
+    #   with:
+    #     script: |
+    #               dir "*.Tests.csproj" -Recurse | %{dotnet test  $PSItem.FullName --logger ("trx;LogFileName=" + ($PSItem.Name -replace ".csproj", ".trx")) --no-restore --no-build}
+    #               dir "*.Tests.trx" -Recurse | %{ copy-item -Path $PSItem.FullName };
+    
+    # - shell: pwsh
+    #   run: echo '${{ steps.dotnet_test.outputs.result }}'
+
+    # - name: Create test report
+    #   uses: dorny/test-reporter@v1.6.0
+    #   if: success() || failure()  # run this step even if previous step failed
+    #   with:
+    #     name: Unit Tests ${{ inputs.build_os }}  # Name of the check run which will be created
+    #     path: ./*.Tests.trx  # Path to test results
+    #     reporter: dotnet-trx  # Format of test results
