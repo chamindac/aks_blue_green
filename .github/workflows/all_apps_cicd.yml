@@ -11,9 +11,11 @@ on:
 env:
   apps: ${{ github.event_name == 'push' && '["customer_api","invoice_api"]' || inputs.apps}} # https://docs.github.com/en/actions/learn-github-actions/expressions#example
 
+name: all_apps_cicd
+
 jobs:
   env_vars: # Since passing env variables to reusable workflows not supported # https://github.com/orgs/community/discussions/26671
-    name: Setup Dynamic Environment Variables
+    name: Expose env variables
     runs-on: ubuntu-latest
     outputs:
       apps: ${{ env.apps }}
@@ -21,27 +23,17 @@ jobs:
       - run: echo "Exposing env vars to reusable workflows"
   
   build_unittest_and_push:
+    permissions:
+      id-token: write
+      contents: read
+      checks: write
     needs: [env_vars]
+    # runs-on: "ubuntu-latest"
+    # steps:
+    #   - shell: pwsh
+    #     run: |
+    #       echo 'apps from input ${{ inputs.apps }}'
+    #       echo 'apps from env ${{ env.apps }}'
     uses: ./.github/workflows/build_unittest_and_push.yml
     with:
       apps: ${{ needs.env_vars.outputs.apps }}
-# env:
-#   apps: ${{ github.event_name == 'push' && '["customer_api","invoice_api"]' || inputs.apps}} # https://docs.github.com/en/actions/learn-github-actions/expressions#example
-
-# name: all_apps_cicd
-
-# jobs:
-#   build_unittest_and_push:
-#     permissions:
-#       id-token: write
-#       contents: read
-#       checks: write
-#     runs-on: "ubuntu-latest"
-#     steps:
-#       - shell: pwsh
-#         run: |
-#           echo 'apps from input ${{ inputs.apps }}'
-#           echo 'apps from env ${{ env.apps }}'
-#     # uses: ./.github/workflows/build_unittest_and_push.yml
-#     # with:
-#     #   apps: $apps
