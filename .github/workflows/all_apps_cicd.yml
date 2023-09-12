@@ -1,4 +1,13 @@
-on: [workflow_dispatch, push]
+on: 
+  push:
+  workflow_dispatch:
+    inputs:
+      apps:
+        description: 'App to deploy'
+        type: string
+        default: '["customer_api","invoice_api"]'
+        required: true
+
 name: all_apps_cicd
 
 jobs:
@@ -7,4 +16,10 @@ jobs:
       id-token: write
       contents: read
       checks: write
-    uses: ./.github/workflows/build_unittest_and_push.yml
+    runs-on: "ubuntu-latest"
+    steps:
+      - shell: pwsh
+        run: |
+          echo 'apps from input`` ${{ inputs.apps }}'
+          echo 'apps from env ${{ env.apps }}'
+    # uses: ./.github/workflows/build_unittest_and_push.yml
