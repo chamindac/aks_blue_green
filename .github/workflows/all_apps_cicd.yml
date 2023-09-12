@@ -24,7 +24,7 @@ jobs:
       - shell: pwsh
         run: |
           echo 'apps from input ${{ inputs.apps }}'
-          echo 'apps from env $apps'
+          echo 'apps from env $APPS'
     # uses: ./.github/workflows/build_unittest_and_push.yml
     # with:
     #   apps: $apps
