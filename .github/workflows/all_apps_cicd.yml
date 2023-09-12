@@ -27,4 +27,4 @@ jobs:
     #       echo 'apps from env ${{ env.apps }}'
     uses: ./.github/workflows/build_unittest_and_push.yml
     with:
-      apps: ${{ inputs.apps }}
+      apps: ${{ env.apps }}
