@@ -8,6 +8,9 @@ on:
         default: '["customer_api","invoice_api"]'
         required: true
 
+env:
+  apps: '["customer_api","invoice_api"]'
+
 name: all_apps_cicd
 
 jobs:
@@ -20,6 +23,6 @@ jobs:
     steps:
       - shell: pwsh
         run: |
-          echo 'apps from input`` ${{ inputs.apps }}'
+          echo 'apps from input ${{ inputs.apps }}'
           echo 'apps from env ${{ env.apps }}'
     # uses: ./.github/workflows/build_unittest_and_push.yml
