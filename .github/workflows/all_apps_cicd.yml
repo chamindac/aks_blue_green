@@ -9,7 +9,7 @@ on:
         required: true
 
 env:
-  apps: Monday
+  apps: '["customer_api","invoice_api"]'
 
 jobs:
   greeting_job:
