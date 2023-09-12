@@ -10,9 +10,7 @@ runs:
   using: "composite"
   steps:
     - shell: pwsh
-      run: |
-        echo 'runing tests ${{ inputs.build_os }}'
-        echo 'apps from env ${{ env.apps }}'
+      run: echo 'runing tests ${{ inputs.build_os }}'
 
     # - uses: actions/setup-dotnet@v3
     #   with:

@@ -1,5 +1,11 @@
 on:
   workflow_call:
+    inputs:
+      apps:
+        description: 'App to deploy'
+        type: string
+        required: true
+
 name: build_unittest_and_push
 
 jobs:
@@ -22,3 +28,10 @@ jobs:
         uses: ./.github/actions/build_and_unittest
         with:
           build_os: Linux
+  
+  build_and_push_app:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v4
+      - shell: pwsh
+        run: echo 'apps ${{ inputs.apps }}'
