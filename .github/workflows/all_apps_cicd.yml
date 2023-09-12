@@ -12,7 +12,7 @@ env:
   apps: '["customer_api","invoice_api"]'
 
 jobs:
-  greeting_job:
+  build_unittest_and_push:
     runs-on: ubuntu-latest
     env:
       Greeting: Hello
