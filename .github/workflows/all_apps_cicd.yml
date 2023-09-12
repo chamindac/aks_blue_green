@@ -23,7 +23,7 @@ jobs:
     #       First_Name: Mona
     uses: ./.github/workflows/build_unittest_and_push.yml
     with:
-      apps: $apps
+      apps: ${{ inputs.apps }}
 # env:
 #   apps: ${{ github.event_name == 'push' && '["customer_api","invoice_api"]' || inputs.apps}} # https://docs.github.com/en/actions/learn-github-actions/expressions#example
 
