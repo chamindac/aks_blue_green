@@ -13,14 +13,17 @@ env:
 
 jobs:
   build_unittest_and_push:
-    runs-on: ubuntu-latest
-    env:
-      Greeting: Hello
-    steps:
-      - name: "Say Hello Mona it's Monday"
-        run: echo "$Greeting $First_Name. Today is $apps!"
-        env:
-          First_Name: Mona
+    # runs-on: ubuntu-latest
+    # env:
+    #   Greeting: Hello
+    # steps:
+    #   - name: "Say Hello Mona it's Monday"
+    #     run: echo "$Greeting $First_Name. Today is $apps!"
+    #     env:
+    #       First_Name: Mona
+    uses: ./.github/workflows/build_unittest_and_push.yml
+    with:
+      apps: $apps
 # env:
 #   apps: ${{ github.event_name == 'push' && '["customer_api","invoice_api"]' || inputs.apps}} # https://docs.github.com/en/actions/learn-github-actions/expressions#example
 
