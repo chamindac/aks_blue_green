@@ -9,21 +9,22 @@ on:
         required: true
 
 env:
-  apps: '["customer_api","invoice_api"]'
+  apps: ${{ github.event_name == 'push' && '["customer_api","invoice_api"]' || inputs.apps}} # https://docs.github.com/en/actions/learn-github-actions/expressions#example
 
 jobs:
+  env_vars: # Since passing env variables to reusable workflows not supported # https://github.com/orgs/community/discussions/26671
+    name: Setup Dynamic Environment Variables
+    runs-on: ubuntu-latest
+    outputs:
+      apps: ${{ env.apps }}
+    steps:
+      - run: echo "Exposing env vars"
+  
   build_unittest_and_push:
-    # runs-on: ubuntu-latest
-    # env:
-    #   Greeting: Hello
-    # steps:
-    #   - name: "Say Hello Mona it's Monday"
-    #     run: echo "$Greeting $First_Name. Today is $apps!"
-    #     env:
-    #       First_Name: Mona
+    needs: [env_setup]
     uses: ./.github/workflows/build_unittest_and_push.yml
     with:
-      apps: ${{ inputs.apps }}
+      apps: ${{ needs.env_vars.outputs.apps }}
 # env:
 #   apps: ${{ github.event_name == 'push' && '["customer_api","invoice_api"]' || inputs.apps}} # https://docs.github.com/en/actions/learn-github-actions/expressions#example
 
