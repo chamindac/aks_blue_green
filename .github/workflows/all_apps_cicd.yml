@@ -15,7 +15,6 @@ name: all_apps_cicd
 
 jobs:
   build_unittest_and_push:
-    needs: [env_vars]
     runs-on: "ubuntu-latest"
     steps:
       - shell: pwsh
