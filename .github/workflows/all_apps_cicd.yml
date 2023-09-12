@@ -18,10 +18,10 @@ jobs:
     outputs:
       apps: ${{ env.apps }}
     steps:
-      - run: echo "Exposing env vars"
+      - run: echo "Exposing env vars to reusable workflows"
   
   build_unittest_and_push:
-    needs: [env_setup]
+    needs: [env_vars]
     uses: ./.github/workflows/build_unittest_and_push.yml
     with:
       apps: ${{ needs.env_vars.outputs.apps }}
