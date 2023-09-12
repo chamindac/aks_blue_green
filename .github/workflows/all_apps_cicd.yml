@@ -9,7 +9,7 @@ on:
         required: true
 
 env:
-  APPS: ${{ github.event_name == 'push' && '["customer_api","invoice_api"]' || inputs.apps}} # https://docs.github.com/en/actions/learn-github-actions/expressions#example
+  apps: ${{ github.event_name == 'push' && '["customer_api","invoice_api"]' || inputs.apps}} # https://docs.github.com/en/actions/learn-github-actions/expressions#example
 
 name: all_apps_cicd
 
@@ -24,7 +24,7 @@ jobs:
       - shell: pwsh
         run: |
           echo 'apps from input ${{ inputs.apps }}'
-          echo 'apps from env $APPS'
+          echo 'apps from env $env:apps'
     # uses: ./.github/workflows/build_unittest_and_push.yml
     # with:
     #   apps: $apps
