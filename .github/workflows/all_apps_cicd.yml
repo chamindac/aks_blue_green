@@ -9,22 +9,35 @@ on:
         required: true
 
 env:
-  apps: ${{ github.event_name == 'push' && '["customer_api","invoice_api"]' || inputs.apps}} # https://docs.github.com/en/actions/learn-github-actions/expressions#example
-
-name: all_apps_cicd
+  DAY_OF_WEEK: Monday
 
 jobs:
-  build_unittest_and_push:
-    permissions:
-      id-token: write
-      contents: read
-      checks: write
-    runs-on: "ubuntu-latest"
+  greeting_job:
+    runs-on: ubuntu-latest
+    env:
+      Greeting: Hello
     steps:
-      - shell: pwsh
-        run: |
-          echo 'apps from input ${{ inputs.apps }}'
-          echo 'apps from env $env:apps'
-    # uses: ./.github/workflows/build_unittest_and_push.yml
-    # with:
-    #   apps: $apps
+      - name: "Say Hello Mona it's Monday"
+        run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
+        env:
+          First_Name: Mona
+# env:
+#   apps: ${{ github.event_name == 'push' && '["customer_api","invoice_api"]' || inputs.apps}} # https://docs.github.com/en/actions/learn-github-actions/expressions#example
+
+# name: all_apps_cicd
+
+# jobs:
+#   build_unittest_and_push:
+#     permissions:
+#       id-token: write
+#       contents: read
+#       checks: write
+#     runs-on: "ubuntu-latest"
+#     steps:
+#       - shell: pwsh
+#         run: |
+#           echo 'apps from input ${{ inputs.apps }}'
+#           echo 'apps from env ${{ env.apps }}'
+#     # uses: ./.github/workflows/build_unittest_and_push.yml
+#     # with:
+#     #   apps: $apps
