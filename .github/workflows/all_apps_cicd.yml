@@ -23,6 +23,10 @@ jobs:
       - run: echo "Exposing env vars to reusable workflows"
   
   build_unittest_and_push:
+    permissions:
+      id-token: write
+      contents: read
+      checks: write
     needs: [env_vars]
     uses: ./.github/workflows/build_unittest_and_push.yml
     with:
