@@ -14,20 +14,13 @@ env:
 name: all_apps_cicd
 
 jobs:
-  env_vars: # Since passing env variables to reusable workflows not supported # https://github.com/orgs/community/discussions/26671
-    name: Expose env variables
+  env_vars: 
+    name: Check env variables is available
     runs-on: ubuntu-latest
-    outputs:
-      apps: ${{ env.apps }}
     steps:
-      - run: echo "Exposing env vars to reusable workflows"
+      - run: echo 'Apps env var value ${{ env.apps }}'
   
-  build_unittest_and_push:
-    permissions:
-      id-token: write
-      contents: read
-      checks: write
-    needs: [env_vars]
-    uses: ./.github/workflows/build_unittest_and_push.yml
-    with:
-      apps: ${{ needs.env_vars.outputs.apps }}
+  # build_unittest_and_push:
+  #   uses: ./.github/workflows/build_unittest_and_push.yml
+  #   with:
+  #     apps: ${{ env.apps }}
