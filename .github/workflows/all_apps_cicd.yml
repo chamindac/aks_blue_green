@@ -20,7 +20,7 @@ jobs:
     steps:
       - run: echo 'Apps env var value ${{ env.apps }}'
   
-  # build_unittest_and_push:
-  #   uses: ./.github/workflows/build_unittest_and_push.yml
-  #   with:
-  #     apps: ${{ env.apps }}
+  build_unittest_and_push:
+    uses: ./.github/workflows/build_unittest_and_push.yml
+    with:
+      apps: ${{ env.apps }}
