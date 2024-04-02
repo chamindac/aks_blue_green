@@ -29,9 +29,12 @@ jobs:
         with:
           build_os: Linux
   
-  build_and_push_app:
+  example_matrix:
+    strategy:
+      matrix:
+        app: ${{ inputs.apps }}
     runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@v4
       - shell: pwsh
-        run: echo 'apps ${{ inputs.apps }}'
+        run: echo 'app name is ${{ matrix.app }}'
