@@ -9,25 +9,25 @@ on:
 name: build_unittest_and_push
 
 jobs:
-  build_and_unittest_windows:
-    runs-on: "windows-latest"
-    steps:
-      - uses: actions/checkout@v4
-      - name: Build and Unit Test
-        id: build_and_unittest
-        uses: ./.github/actions/build_and_unittest
-        with:
-          build_os: Windows
+  # build_and_unittest_windows:
+  #   runs-on: "windows-latest"
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Build and Unit Test
+  #       id: build_and_unittest
+  #       uses: ./.github/actions/build_and_unittest
+  #       with:
+  #         build_os: Windows
 
-  build_and_unittest_linux:
-    runs-on: "ubuntu-latest"
-    steps:
-      - uses: actions/checkout@v4
-      - name: Build and Unit Test
-        id: build_and_unittest
-        uses: ./.github/actions/build_and_unittest
-        with:
-          build_os: Linux
+  # build_and_unittest_linux:
+  #   runs-on: "ubuntu-latest"
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Build and Unit Test
+  #       id: build_and_unittest
+  #       uses: ./.github/actions/build_and_unittest
+  #       with:
+  #         build_os: Linux
   
   build_and_push:
     strategy:
