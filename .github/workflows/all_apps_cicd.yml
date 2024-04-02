@@ -5,11 +5,11 @@ on:
       apps:
         description: 'App to deploy'
         type: string
-        default: '[customer_api,invoice_api]'
+        default: "[customer_api,invoice_api]"
         required: true
 
 env:
-  apps: ${{ github.event_name == 'push' && '[customer_api,invoice_api]' || inputs.apps}} # https://docs.github.com/en/actions/learn-github-actions/expressions#example
+  apps: ${{ github.event_name == 'push' && "[customer_api,invoice_api]" || inputs.apps}} # https://docs.github.com/en/actions/learn-github-actions/expressions#example
 
 name: all_apps_cicd
 
