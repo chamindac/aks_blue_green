@@ -5,7 +5,7 @@ on:
       apps:
         description: 'App to deploy'
         type: string
-        default: '["customer_api"]'
+        default: '["customer_api", "invoice_api"]'
         required: true
 
 env:

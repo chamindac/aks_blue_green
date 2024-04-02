@@ -29,7 +29,7 @@ jobs:
         with:
           build_os: Linux
   
-  example_matrix:
+  build_and_push:
     strategy:
       matrix:
         app: ${{ fromJSON(inputs.apps) }}
