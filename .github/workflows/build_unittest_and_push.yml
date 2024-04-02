@@ -32,7 +32,7 @@ jobs:
   example_matrix:
     strategy:
       matrix:
-        app: ["customer_api","invoice_api"]
+        app: ${{ input.apps }}
     runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@v4
